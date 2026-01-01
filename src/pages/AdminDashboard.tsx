@@ -7,11 +7,12 @@ import { ProfileManager } from "@/components/admin/ProfileManager";
 import { ActivitiesManager } from "@/components/admin/ActivitiesManager";
 import { GalleryManager } from "@/components/admin/GalleryManager";
 import { ContactManager } from "@/components/admin/ContactManager";
+import { DashboardStats } from "@/components/admin/DashboardStats";
 import { Loader2 } from "lucide-react";
 
 const AdminDashboard = () => {
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState("profile");
+  const [activeTab, setActiveTab] = useState("dashboard");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -58,8 +59,21 @@ const AdminDashboard = () => {
     );
   }
 
+  const getTabTitle = () => {
+    switch (activeTab) {
+      case "dashboard": return "Dashboard";
+      case "profile": return "Profil";
+      case "activities": return "Kegiatan";
+      case "gallery": return "Galeri";
+      case "contact": return "Kontak";
+      default: return "Dashboard";
+    }
+  };
+
   const renderContent = () => {
     switch (activeTab) {
+      case "dashboard":
+        return <DashboardStats />;
       case "profile":
         return <ProfileManager />;
       case "activities":
@@ -69,7 +83,7 @@ const AdminDashboard = () => {
       case "contact":
         return <ContactManager />;
       default:
-        return <ProfileManager />;
+        return <DashboardStats />;
     }
   };
 
@@ -80,8 +94,8 @@ const AdminDashboard = () => {
         <main className="flex-1 p-6">
           <div className="flex items-center gap-4 mb-6">
             <SidebarTrigger />
-            <h1 className="font-display text-2xl font-bold text-foreground capitalize">
-              Kelola {activeTab === "profile" ? "Profil" : activeTab === "activities" ? "Kegiatan" : activeTab === "gallery" ? "Galeri" : "Kontak"}
+            <h1 className="font-display text-2xl font-bold text-foreground">
+              {getTabTitle()}
             </h1>
           </div>
           {renderContent()}

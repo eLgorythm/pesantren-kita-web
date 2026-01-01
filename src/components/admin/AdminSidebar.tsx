@@ -12,7 +12,7 @@ import {
   SidebarFooter,
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
-import { Building2, Calendar, Image, Phone, LogOut, Home } from "lucide-react";
+import { Building2, Calendar, Image, Phone, LogOut, Home, LayoutDashboard } from "lucide-react";
 
 interface AdminSidebarProps {
   activeTab: string;
@@ -20,6 +20,7 @@ interface AdminSidebarProps {
 }
 
 const menuItems = [
+  { id: "dashboard", title: "Dashboard", icon: LayoutDashboard },
   { id: "profile", title: "Profil Pesantren", icon: Building2 },
   { id: "activities", title: "Kegiatan", icon: Calendar },
   { id: "gallery", title: "Galeri", icon: Image },
